@@ -35,7 +35,6 @@ void Turnout::activate(Print* stream, int s, DCC* track){
   track->setAccessory(data.address, data.subAddress, data.tStatus, response);
   if(num>0)
     EEPROM.put(num,data.tStatus);
-  CommManager::send(stream, F("<H %d %d>"), data.id, data.tStatus);
   turnoutlistHash++;
 }
 

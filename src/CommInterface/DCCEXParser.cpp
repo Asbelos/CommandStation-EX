@@ -169,8 +169,10 @@ void DCCEXParser::parse(Print* stream, const char *com) {
     // thrown) or one (thrown)
     case 2:   
       t=Turnout::get(p[0]);
-      if(t!=NULL)
+      if(t!=NULL) {
         t->activate(stream, p[1], (DCC*) mainTrack);
+        CommManager::send(stream, F("<H %d %d>"), t->data.id, t->data.tStatus);
+      }
       else
         CommManager::send(stream, F("<X>"));
       break;
